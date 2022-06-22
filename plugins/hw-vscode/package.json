@@ -1,5 +1,5 @@
 {
-  "name": "hw-vscode",
+	"name": "hw-vscode",
 	"displayName": "hw-vscode",
 	"description": "",
 	"version": "0.0.1",
@@ -10,20 +10,21 @@
 		"Other"
 	],
 	"activationEvents": [
-        "onCommand:hw-vscode.helloWorld"
+		"onCommand:hw-vscode.helloWorld"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
 				"command": "hw-vscode.helloWorld",
-				"title": "Hello World"
+				"title": "Hello World",
+				"when": " !testContext"
 			}
 		]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
-		"prepare":"yarn compile",
+		"prepare": "yarn compile",
 		"compile": "tsc -p ./",
 		"build": "tsc -p ./",
 		"watch": "tsc -watch -p ./",
