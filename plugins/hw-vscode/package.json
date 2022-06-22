@@ -10,17 +10,61 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:hw-vscode.helloWorld"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "hw-vscode.helloWorld",
-				"title": "Hello World",
+				"command": "hw-vscode.helloWorldNoCondition",
+				"title": "Hello World (No Condition)"
+			},
+			{
+				"command": "hw-vscode.helloWorldCommandCondition",
+				"title": "Hello World (Command Condition)",
 				"when": " !testContext"
+			},
+			{
+				"command": "hw-vscode.helloWorldContextMenuCondition",
+				"title": "Hello World (Context Menu Condition)"
+			},
+			{
+				"command": "hw-vscode.togleContext",
+				"title": "Hello World - Toggle Context"
 			}
-		]
+		],
+		"viewsContainers": {
+            "activitybar": [
+                {
+                    "id": "testContainer",
+                    "icon": "images/icon.svg",
+                    "title": "Test Container"
+                }
+            ]
+        },
+        "views": {
+            "testContainer": [
+                {
+                    "id": "testTreeView",
+                    "name": "Test Tree View",
+                    "icon": "images/icon.svg"
+                }
+            ]
+        },
+		"menus": {
+			"view/item/context": [
+				{
+					"command": "hw-vscode.helloWorldNoCondition"
+				},
+				{
+					"command": "hw-vscode.helloWorldCommandCondition"
+				},
+				{
+					"command": "hw-vscode.helloWorldContextMenuCondition",
+					"when": " !testContext"
+				}
+			]
+		}
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",

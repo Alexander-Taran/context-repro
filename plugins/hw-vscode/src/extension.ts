@@ -1,6 +1,9 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
+import { TestTreeViewDataProvider } from './TreeViewExample';
+
+let testContext = false;
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -14,13 +17,44 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('hw-vscode.helloWorld', () => {
+	let noConditionCommand = vscode.commands.registerCommand('hw-vscode.helloWorldNoCondition', () => {
 		// The code you place here will be executed every time your command is executed
 		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from hw-vscode!');
+		vscode.window.showInformationMessage('Hello World Without Condition from hw-vscode!');
 	});
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(noConditionCommand);
+
+	let commandCondition = vscode.commands.registerCommand('hw-vscode.helloWorldCommandCondition', () => {
+		// The code you place here will be executed every time your command is executed
+		// Display a message box to the user
+		vscode.window.showInformationMessage('Hello World With Condition In Command from hw-vscode!');
+	});
+
+	context.subscriptions.push(commandCondition);
+
+	let menuCondition = vscode.commands.registerCommand('hw-vscode.helloWorldContextMenuCondition', () => {
+		// The code you place here will be executed every time your command is executed
+		// Display a message box to the user
+		vscode.window.showInformationMessage('Hello World With Condition In Context Menu from hw-vscode!');
+	});
+
+	context.subscriptions.push(menuCondition);
+
+	let toggleContext = vscode.commands.registerCommand('hw-vscode.togleContext', () => {
+		// The code you place here will be executed every time your command is executed
+		// Display a message box to the user
+		testContext = !testContext;
+		vscode.window.showInformationMessage(`Switched context to ${testContext}`);
+	});
+
+	context.subscriptions.push(toggleContext);
+
+	vscode.commands.registerCommand('vscode.test.hello', () => {
+        vscode.window.showInformationMessage('Hello!');
+    });
+
+    vscode.window.registerTreeDataProvider('testTreeView', new TestTreeViewDataProvider());
 }
 
 // this method is called when your extension is deactivated
